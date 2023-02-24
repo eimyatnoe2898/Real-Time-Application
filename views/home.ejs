@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      //create a instance for the current socket.io user
+      var socket = io();
+
+      //show all the existing data in the database
+      socket.on("connection", (data) => {
+        // document.querySelector(".existingdata").innerHTML = data.length;
+        console.log("Existing Data");
+        console.log(data);
+        document.querySelector(".existingdata").innerHTML =
+          JSON.stringify(data);
+        }
+      );
+
+      //show the newly added data in the database
+      socket.on("showNewData", (data) => {
+        // dataCount = data.length;
+        console.log("New Data");
+        console.log(data);
+        document.querySelector(".newdata").innerHTML +=
+          JSON.stringify(data);
+      });
+
+    </script>
+  </head>
+  <body>
+    <h1>Data Dashboard</h1>
+    <h2>Newly added data</h2>
+    <p class="newdata"></p>
+    <h2>Existing Data</h2>
+    <p class="existingdata"></p>
+  </body>
+</html>
